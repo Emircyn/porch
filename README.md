@@ -72,18 +72,25 @@ secret in `STRIPE_WEBHOOK_SECRET`.
 ```bash
 npm test          # 61 tests: webhooks, plan rules on Postgres, helpers
 npm run lint
+npm run typecheck
 ```
+
+The same three run in CI on every push and pull request.
 
 ## Deploy
 
-`node scripts/deploy.mjs` shows the plan; `node scripts/deploy.mjs --yes` creates the KV namespaces for the
-page cache, registers the Stripe webhook for the live URL, uploads secrets, points Supabase auth at the live
-site, builds and deploys to Cloudflare Workers.
+`npm run deploy` shows the plan and changes nothing; `npm run deploy -- --yes` creates the KV namespaces for
+the page cache, registers the Stripe webhook for the live URL, uploads secrets, points Supabase auth at the
+live site, builds and deploys to Cloudflare Workers. It needs `wrangler login` and the keys in `.env.local`.
 
 ## Credits
 
 Themes from [tweakcn](https://tweakcn.com) · brand icons from [Simple Icons](https://simpleicons.org) (CC0) ·
 demo avatars from [DiceBear](https://www.dicebear.com/licenses/) (styles by Micah Lanier, Ashley Seo,
 Lisa Wischofsky, Draftbit and vijay verma under CC BY 4.0; Pablo Stanley; Zoish and others under CC0).
+
+## Licence
+
+MIT, see [LICENSE](LICENSE). The demo avatars keep their own licences (see Credits).
 
 Porch is a portfolio project by Emircan Erdemci. Stripe runs in test mode: no real money moves.

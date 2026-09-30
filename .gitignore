@@ -49,3 +49,10 @@ next-env.d.ts
 
 # graft (local graph cache)
 /graft/
+
+# personal notes and local AI/dev tooling (kept out of the public repo)
+/CLAUDE.md
+/AGENTS.md
+/.mcp.json
+/.ignore
+/docs/portfolio-entry.md

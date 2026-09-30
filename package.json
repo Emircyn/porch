@@ -2,20 +2,26 @@
   "name": "porch",
   "version": "0.1.0",
   "private": true,
+  "description": "Link-in-bio page builder: Next.js, shadcn/ui, Supabase and Stripe on Cloudflare Workers.",
+  "license": "MIT",
+  "author": "Emircan Erdemci",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Emircyn/porch.git"
+  },
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
     "db:push": "dotenv -e .env.local -- sh -c 'supabase db push --db-url \"$SUPABASE_DB_URL\"'",
     "db:types": "dotenv -e .env.local -- sh -c 'supabase gen types typescript --db-url \"$SUPABASE_DB_URL\" --schema public > src/lib/supabase/database.types.ts'",
-    "test": "vitest run",
     "seed:demo": "dotenv -e .env.local -- node scripts/seed-demo.mjs",
-    "deploy:cf": "node scripts/deploy.mjs"
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "node scripts/deploy.mjs",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
