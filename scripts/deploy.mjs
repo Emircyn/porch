@@ -124,6 +124,9 @@ step("Build with OpenNext and deploy")
 if (apply) {
   const buildEnv = { ...process.env, ...env, NEXT_PUBLIC_SITE_URL: site, DEV_TUNNEL_HOST: "" }
   execFileSync("npx", ["opennextjs-cloudflare", "build"], { stdio: "inherit", env: buildEnv })
+  // The landing page is fully static. As a plain asset, Cloudflare serves it before the Worker runs at all,
+  // which saves ~20 ms of Worker CPU per visit (the free plan allows 10 ms per request).
+  fs.copyFileSync(".next/server/app/index.html", ".open-next/assets/index.html")
   execFileSync("npx", ["opennextjs-cloudflare", "deploy"], { stdio: "inherit", env: buildEnv })
   console.log(`\nLive: ${site}\nDemo: ${site}/demo`)
 } else {
