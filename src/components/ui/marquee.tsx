@@ -1,6 +1,6 @@
 "use client"
 
-import { useSyncExternalStore, type ComponentPropsWithoutRef } from "react"
+import { useEffect, useRef, useSyncExternalStore, type ComponentPropsWithoutRef } from "react"
 
 const noSubscribe = () => () => {}
 
@@ -50,10 +50,21 @@ export function Marquee({
   // free Worker does to serve it) small. The strip sits below the fold, so the copies are there before it shows.
   const inBrowser = useSyncExternalStore(noSubscribe, () => true, () => false)
   const copies = inBrowser ? repeat : 1
+  const root = useRef<HTMLDivElement>(null)
+
+  // Loop copies stay clickable and hoverable (whichever copy is on screen must work), but links inside them
+  // are taken out of the tab order so keyboard users meet each item once. (`inert` would also have blocked
+  // the mouse, which left half the strip dead.)
+  useEffect(() => {
+    root.current
+      ?.querySelectorAll("[data-marquee-copy] a, [data-marquee-copy] button")
+      .forEach((el) => el.setAttribute("tabindex", "-1"))
+  }, [copies])
 
   return (
     <div
       {...props}
+      ref={root}
       className={cn(
         "group flex gap-(--gap) overflow-hidden p-2 [--duration:40s] [--gap:1rem]",
         {
@@ -70,8 +81,7 @@ export function Marquee({
             key={i}
             // Copies after the first exist only for the loop; screen readers read the content once.
             aria-hidden={i > 0 ? true : undefined}
-            // …and they can't be tabbed into either.
-            inert={i > 0 ? true : undefined}
+            data-marquee-copy={i > 0 ? "" : undefined}
             className={cn("flex shrink-0 justify-around gap-(--gap)", {
               "animate-marquee flex-row": !vertical,
               "animate-marquee-vertical flex-col": vertical,
