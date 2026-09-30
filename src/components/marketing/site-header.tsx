@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { BrandIcon } from "@/lib/platforms"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -81,17 +82,20 @@ export function SiteHeader() {
                 <ul className="flex flex-col gap-1">
                   {[...nav, { href: "/demo", label: "Live demo" }, { href: "/login", label: "Log in" }].map((item) => (
                     <li key={item.href}>
-                      <Button
-                        variant="ghost"
-                        asChild
-                        className="w-full justify-start text-base"
-                      >
-                        {item.href === "/demo" ? (
-                          <DemoLink>{item.label}</DemoLink>
-                        ) : (
-                          <Link href={item.href}>{item.label}</Link>
-                        )}
-                      </Button>
+                      {/* Close the menu on tap, so an in-page link scrolls into view instead of behind it. */}
+                      <SheetClose asChild>
+                        <Button
+                          variant="ghost"
+                          asChild
+                          className="w-full justify-start text-base"
+                        >
+                          {item.href === "/demo" ? (
+                            <DemoLink>{item.label}</DemoLink>
+                          ) : (
+                            <Link href={item.href}>{item.label}</Link>
+                          )}
+                        </Button>
+                      </SheetClose>
                     </li>
                   ))}
                 </ul>

@@ -9,7 +9,7 @@ function Placeholder() {
   return (
     <div className="rounded-2xl border bg-card p-1.5" role="status" aria-busy="true" aria-label="Loading the editor">
       <div className="h-9" />
-      <div className="grid min-h-[40rem] overflow-hidden rounded-xl border bg-background lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="grid min-h-[45.25rem] overflow-hidden sm:min-h-[41.125rem] lg:min-h-[40rem] rounded-xl border bg-background lg:grid-cols-[minmax(0,1fr)_auto]">
         <div className="flex flex-col gap-4 p-6">
           <Skeleton className="h-9 w-full" />
           <Skeleton className="h-11 w-full rounded-xl" />

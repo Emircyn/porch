@@ -137,7 +137,7 @@ export default function Home() {
         <section
           id="themes"
           aria-labelledby="themes-heading"
-          className="scroll-mt-20 border-y bg-muted/30 py-24 [contain-intrinsic-size:auto_900px] [content-visibility:auto] sm:py-32"
+          className="scroll-mt-20 border-y bg-muted/30 py-24 sm:py-32"
         >
           <div className="px-5 sm:px-8">
             <SectionHeading
@@ -154,7 +154,7 @@ export default function Home() {
         <section
           id="pricing"
           aria-labelledby="pricing-heading"
-          className="mx-auto w-full max-w-4xl scroll-mt-20 px-5 py-24 [contain-intrinsic-size:auto_800px] [content-visibility:auto] sm:px-8 sm:py-32"
+          className="mx-auto w-full max-w-4xl scroll-mt-20 px-5 py-24 sm:px-8 sm:py-32"
         >
           <SectionHeading
             id="pricing-heading"
@@ -169,7 +169,7 @@ export default function Home() {
         <section
           id="faq"
           aria-labelledby="faq-heading"
-          className="mx-auto w-full max-w-3xl scroll-mt-20 px-5 pb-24 [contain-intrinsic-size:auto_700px] [content-visibility:auto] sm:px-8 sm:pb-32"
+          className="mx-auto w-full max-w-3xl scroll-mt-20 px-5 pb-24 sm:px-8 sm:pb-32"
         >
           <SectionHeading
             id="faq-heading"

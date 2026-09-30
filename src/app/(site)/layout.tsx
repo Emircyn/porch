@@ -37,7 +37,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geist.variable} ${geistMono.variable} ${pageFontVariables} h-full antialiased`}
+      // Smooth scrolling for in-page links (#features, #pricing…); Next turns it off for route changes.
+      data-scroll-behavior="smooth"
+      className={`${geist.variable} ${geistMono.variable} ${pageFontVariables} h-full antialiased motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
         <ThemeProvider
