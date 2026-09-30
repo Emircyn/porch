@@ -18,7 +18,7 @@ export default async function DashboardLayout({ children }: LayoutProps<"/dashbo
       <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-md">
         {/* Phones: logo and account on one row, the section nav on its own row below. */}
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 px-5 sm:h-16 sm:flex-nowrap sm:px-8">
-          <Link href="/dashboard" aria-label="Dashboard" className="rounded-lg">
+          <Link href="/dashboard" aria-label="Dashboard" className="rounded-lg" prefetch={false}>
             <Logo />
           </Link>
           {profile.plan === "pro" ? <Badge>Pro</Badge> : null}

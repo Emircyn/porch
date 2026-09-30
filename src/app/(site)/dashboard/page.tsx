@@ -51,7 +51,7 @@ export default async function DashboardPage() {
           </p>
         </div>
         <Button variant="outline" asChild>
-          <Link href={`/${profile.username}`} target="_blank">
+          <Link href={`/${profile.username}`} target="_blank" prefetch={false}>
             <ExternalLinkIcon /> View page
           </Link>
         </Button>

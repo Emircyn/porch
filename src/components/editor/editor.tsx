@@ -312,7 +312,9 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
                 </EmptyHeader>
                 <EmptyContent>
                   <Button asChild>
-                    <Link href="/dashboard/billing">Upgrade to Pro</Link>
+                    <Link href="/dashboard/billing" prefetch={false}>
+                      Upgrade to Pro
+                    </Link>
                   </Button>
                 </EmptyContent>
               </Empty>

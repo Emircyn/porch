@@ -21,6 +21,9 @@ export function DashboardNav({ className }: { className?: string }) {
             <li key={item.href}>
               <Link
                 href={item.href}
+                // No prefetch: each prefetch of a dynamic dashboard page is a full server render, and the free
+                // Worker plan allows 10 ms of CPU per request. The pages are one click away anyway.
+                prefetch={false}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "inline-block rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",

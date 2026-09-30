@@ -44,7 +44,7 @@ export function UserMenu({
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={`/${username}`} target="_blank">
+          <Link href={`/${username}`} target="_blank" prefetch={false}>
             <ExternalLinkIcon /> View my page
           </Link>
         </DropdownMenuItem>
