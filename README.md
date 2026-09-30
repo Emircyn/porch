@@ -110,7 +110,7 @@ For local webhooks: `stripe listen --forward-to localhost:3000/api/stripe/webhoo
 secret in `STRIPE_WEBHOOK_SECRET`.
 
 ```bash
-npm test          # 61 tests: webhooks, plan rules on Postgres, helpers
+npm test          # 62 tests: webhooks, plan rules on Postgres, helpers
 npm run lint
 npm run typecheck
 ```
