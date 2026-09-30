@@ -85,6 +85,11 @@ Stripe · Cloudflare Workers via OpenNext · Vitest · dnd-kit · Recharts · Ma
 - **Link previews cost the Worker nothing.** Every theme page and every user page has an Open Graph card in
   its own theme (`public/og`), drawn with the real components and screenshotted ahead of time by
   `npm run og:build`, instead of rendering images on each request with `ImageResponse`.
+- **It runs on the Workers free plan (10 ms of CPU per request).** Measured on the live Worker and cut down
+  route by route: the landing page is a plain asset (no Worker at all), login and sign-up are static, public
+  pages stay cached for a day and refresh on edit, the dashboard editor renders in the browser, and dashboard
+  links don't prefetch. Warm requests now take 5–14 ms of CPU; only cold starts go over, which the free plan
+  tolerates when they are occasional.
 - **The Worker went from 2.65 MiB to 1.64 MiB** (gzip) to fit the free plan's 3 MiB: `zod/mini`, no Supabase
   client in the browser, and a webpack build so shared modules aren't duplicated per route.
 - **The demo can't be vandalised.** Its editor runs locally, and database triggers refuse writes to the demo
