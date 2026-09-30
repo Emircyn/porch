@@ -43,7 +43,7 @@ describe("platformForUrl", () => {
 
 describe("usernameSchema", () => {
   it("lower-cases valid names", () => expect(usernameSchema.parse("  Maya.Makes ")).toBe("maya.makes"))
-  it.each(["ab", "has space", "dashboard", "a".repeat(31)])("rejects %s", (name) =>
+  it.each(["ab", "has space", "dashboard", "themes", "a".repeat(31)])("rejects %s", (name) =>
     expect(usernameSchema.safeParse(name).success).toBe(false)
   )
 })

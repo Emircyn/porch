@@ -151,10 +151,10 @@ describe("demo account", () => {
 
 describe("usernames", () => {
   it("knows which names are free", async () => {
-    const [row] = await as<{ taken: boolean; free: boolean; reserved: boolean }>(
+    const [row] = await as<{ taken: boolean; free: boolean; reserved: boolean; themes: boolean }>(
       null,
-      `select public.username_available('maya') as taken, public.username_available('someone') as free, public.username_available('dashboard') as reserved`
+      `select public.username_available('maya') as taken, public.username_available('someone') as free, public.username_available('dashboard') as reserved, public.username_available('themes') as themes`
     )
-    expect(row).toEqual({ taken: false, free: true, reserved: false })
+    expect(row).toEqual({ taken: false, free: true, reserved: false, themes: false })
   })
 })

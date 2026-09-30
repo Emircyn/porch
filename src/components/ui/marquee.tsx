@@ -61,6 +61,8 @@ export function Marquee({
             key={i}
             // Copies after the first exist only for the loop; screen readers read the content once.
             aria-hidden={i > 0 ? true : undefined}
+            // …and they can't be tabbed into either.
+            inert={i > 0 ? true : undefined}
             className={cn("flex shrink-0 justify-around gap-(--gap)", {
               "animate-marquee flex-row": !vertical,
               "animate-marquee-vertical flex-col": vertical,

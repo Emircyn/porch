@@ -4,7 +4,7 @@ import * as z from "zod/mini"
 const reserved = new Set([
   "about", "account", "admin", "api", "app", "auth", "billing", "blog", "dashboard", "demo", "editor", "help",
   "home", "login", "logout", "onboarding", "porch", "pricing", "privacy", "r", "settings", "signin", "signup",
-  "static", "support", "terms", "www", "_next",
+  "static", "support", "terms", "themes", "www", "_next",
 ])
 
 // zod/mini keeps this tiny in client bundles (the full zod pulls in every locale).

@@ -1,6 +1,6 @@
 "use client"
 
-import { CameraIcon, CheckIcon, LockIcon, PlusIcon, Trash2Icon, XIcon } from "lucide-react"
+import { CameraIcon, CheckIcon, EyeIcon, LockIcon, PlusIcon, Trash2Icon, XIcon } from "lucide-react"
 import { useRef } from "react"
 import { toast } from "sonner"
 
@@ -133,8 +133,8 @@ export function AppearancePanel({
             const locked = theme.pro && plan !== "pro"
             const selected = profile.themeId === theme.id
             return (
+              <div key={theme.id} className="group/card relative">
               <button
-                key={theme.id}
                 type="button"
                 role="radio"
                 aria-checked={selected}
@@ -173,6 +173,18 @@ export function AppearancePanel({
                   ) : null}
                 </span>
               </button>
+              {/* A sibling, not inside the button: opens the full-size preview in a new tab. */}
+              <a
+                href={`/themes/${theme.id}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Preview ${theme.name} full size (opens in a new tab)`}
+                title="Preview full size"
+                className="absolute top-1.5 left-1.5 flex size-6 items-center justify-center rounded-full bg-background/90 text-foreground opacity-0 shadow-sm transition-opacity group-focus-within/card:opacity-100 group-hover/card:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none max-sm:opacity-100"
+              >
+                <EyeIcon className="size-3.5" />
+              </a>
+              </div>
             )
           })}
         </div>
