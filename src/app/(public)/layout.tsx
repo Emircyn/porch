@@ -10,6 +10,7 @@ const geist = Geist({ variable: "--font-sans", subsets: ["latin", "latin-ext"] }
 // Link previews need absolute image URLs.
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  openGraph: { siteName: "Porch" },
 }
 
 // Public pages get their own root layout: no theme switcher, toasts or animation libraries. What a visitor

@@ -29,9 +29,9 @@ export async function generateMetadata({ params }: PageProps<"/[username]">): Pr
     { url: `/og/pages/${page.profile.themeId}.jpg`, width: 1200, height: 630, alt: `${name} on Porch` },
   ]
   return {
-    title: `${name} (@${page.profile.username})`,
+    title: `${name} (@${page.profile.username}) · Links on Porch`,
     description,
-    openGraph: { title: name, description, images, type: "profile", url: `/${page.profile.username}` },
+    openGraph: { title: name, description, images, type: "profile", siteName: "Porch", url: `/${page.profile.username}` },
     twitter: { card: "summary_large_image", title: name, description, images },
   }
 }
