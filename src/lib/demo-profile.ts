@@ -103,21 +103,19 @@ const persona = (
 export const showcasePersonas: Persona[] = [
   persona(
     {
-      username: "emircanerdemci",
+      username: "emircyn",
       displayName: "Emircan Erdemci",
-      bio: "Frontend developer. React, Next.js and TypeScript. I turn ideas into MVPs you can ship.",
+      bio: "Frontend developer in Ankara. React, Vue, Astro and TypeScript, built with AI-assisted workflows.",
       avatar: "emircan",
       themeId: "cyberpunk",
-      socials: [
-        { platform: "github", url: "https://github.com/emircanerdemci" },
-        { platform: "x", url: "https://x.com/emircanerdemci" },
-      ],
+      socials: [{ platform: "github", url: "https://github.com/Emircyn" }],
     },
     [
-      ["Hire me on Upwork", "https://www.upwork.com/freelancers/emircanerdemci"],
-      ["Porch: this link-in-bio builder", "https://github.com/emircanerdemci/porch"],
-      ["Parley: an AI chat app", "https://github.com/emircanerdemci/parley"],
-      ["Cinelyst: find your next film", "https://github.com/emircanerdemci/cinelyst"],
+      ["Hire me on Upwork", "https://www.upwork.com/freelancers/~0171a99e329c46e08d"],
+      ["Portfolio: emircyn.com", "https://emircyn.com"],
+      ["Parley: AI chat with live tool cards", "https://parley.emircan-erdemci.workers.dev"],
+      ["Porch: this link-in-bio builder", "https://github.com/Emircyn/porch"],
+      ["Agentic starter kit for Claude Code", "https://github.com/Emircyn/agentic-setup-starter-kit"],
     ]
   ),
   persona(
