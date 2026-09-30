@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ExternalLinkIcon } from "lucide-react"
+import { ExternalLinkIcon, SparklesIcon } from "lucide-react"
 import Link from "next/link"
 
 import { Editor } from "@/components/editor/editor"
@@ -33,7 +33,11 @@ export default async function DashboardPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Your page</h1>
-          <p className="text-sm text-muted-foreground">Changes save as you go and show up on your page within a minute.</p>
+          <p className="text-sm text-muted-foreground">
+            {profile.is_demo
+              ? "The demo page, with 90 days of made-up visitors."
+              : "Changes save as you go and show up on your page within a minute."}
+          </p>
         </div>
         <Button variant="outline" asChild>
           <Link href={`/${profile.username}`} target="_blank">
@@ -42,11 +46,28 @@ export default async function DashboardPage() {
         </Button>
       </div>
 
+      {profile.is_demo ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm">
+          <p className="flex items-center gap-2">
+            <SparklesIcon className="size-4 text-primary" aria-hidden="true" />
+            You&apos;re looking around the demo account. Try anything; changes aren&apos;t saved.
+          </p>
+          <Button asChild size="sm">
+            <Link href="/signup">Create your own page</Link>
+          </Button>
+        </div>
+      ) : null}
+
       <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
         <Editor
           plan={profile.plan === "pro" ? "pro" : "free"}
           stats={stats}
-          persistence={{ saveProfile, saveTheme, addLink, updateLink, deleteLink, restoreLink, reorderLinks }}
+          demo={profile.is_demo}
+          persistence={
+            profile.is_demo
+              ? undefined
+              : { saveProfile, saveTheme, addLink, updateLink, deleteLink, restoreLink, reorderLinks }
+          }
           initialState={{
             profile: {
               username: profile.username!,

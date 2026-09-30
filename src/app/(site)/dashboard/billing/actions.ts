@@ -34,6 +34,7 @@ async function ensureCustomer(): Promise<string> {
 
 export async function startCheckout() {
   const { profile } = await getCurrentProfile()
+  if (profile.is_demo) redirect("/dashboard/billing?demo=1")
   if (profile.plan === "pro") redirect("/dashboard/billing")
 
   const price = process.env.STRIPE_PRO_PRICE_ID
@@ -54,6 +55,8 @@ export async function startCheckout() {
 }
 
 export async function openBillingPortal() {
+  const { profile } = await getCurrentProfile()
+  if (profile.is_demo) redirect("/dashboard/billing?demo=1")
   const session = await getStripe().billingPortal.sessions.create({
     customer: await ensureCustomer(),
     return_url: `${await origin()}/dashboard/billing`,

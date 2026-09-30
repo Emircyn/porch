@@ -35,9 +35,12 @@ export default function AnalyticsPanel({ stats, links }: { stats: ClickStats; li
   const topLink = perLink[0]
   const topSource = stats.referrers[0]
   const maxLink = Math.max(1, ...perLink.map((row) => row.clicks))
-  const lastWeek = stats.daily.slice(-7).reduce((sum, day) => sum + day.clicks, 0)
-  const weekBefore = stats.daily.slice(-14, -7).reduce((sum, day) => sum + day.clicks, 0)
+  // Compare whole days only: today is still under way and would always look like a drop.
+  const lastWeek = stats.daily.slice(-8, -1).reduce((sum, day) => sum + day.clicks, 0)
+  const weekBefore = stats.daily.slice(-15, -8).reduce((sum, day) => sum + day.clicks, 0)
   const change = weekBefore ? (lastWeek - weekBefore) / weekBefore : 0
+  // The chart stops at yesterday: a half-finished today would read as a sudden drop.
+  const completeDays = stats.daily.slice(0, -1)
 
   return (
     <div className="flex flex-col gap-4">
@@ -60,11 +63,11 @@ export default function AnalyticsPanel({ stats, links }: { stats: ClickStats; li
       <Card className="gap-2 py-5">
         <CardHeader className="px-5">
           <CardTitle>Clicks per day</CardTitle>
-          <CardDescription>Last 30 days, in UTC</CardDescription>
+          <CardDescription>Up to yesterday, in UTC</CardDescription>
         </CardHeader>
         <CardContent className="px-2 sm:px-4">
           <ChartContainer config={chartConfig} className="aspect-auto h-44 w-full">
-            <AreaChart data={stats.daily} margin={{ left: 8, right: 8, top: 8 }}>
+            <AreaChart data={completeDays} margin={{ left: 8, right: 8, top: 8 }}>
               <defs>
                 <linearGradient id="fill-clicks" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="var(--color-clicks)" stopOpacity={0.35} />

@@ -20,6 +20,7 @@ const linkFields = z.object({
 /** Runs a change as the signed-in user, then refreshes their cached public page. */
 async function run(change: (ctx: { supabase: Awaited<ReturnType<typeof createClient>>; userId: string }) => PromiseLike<{ error: { code?: string; hint?: string; message: string } | null }>): Promise<ActionResult> {
   const { profile } = await getCurrentProfile()
+  if (profile.is_demo) return { error: "The demo account is read-only. Sign up to make your own page." }
   const supabase = await createClient()
   const { error } = await change({ supabase, userId: profile.id })
   if (error) {

@@ -11,6 +11,7 @@ export const metadata: Metadata = { title: "Log in" }
 const linkErrors: Record<string, string> = {
   link: "That link has expired or was already used. Log in, or sign up again.",
   oauth: "GitHub sign-in isn't available right now. Use your e-mail instead.",
+  demo: "The demo account is taking a break. Try again in a minute, or sign up for your own page.",
 }
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {

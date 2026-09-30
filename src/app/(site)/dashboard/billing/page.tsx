@@ -17,7 +17,7 @@ const dateFormat = new Intl.DateTimeFormat("en-US", { dateStyle: "long" })
 
 export default async function BillingPage({ searchParams }: PageProps<"/dashboard/billing">) {
   const { profile } = await getCurrentProfile()
-  const { checkout } = await searchParams
+  const { checkout, demo } = await searchParams
   const isPro = profile.plan === "pro"
   const until = profile.current_period_end ? dateFormat.format(new Date(profile.current_period_end)) : null
   const waiting = checkout === "success" && !isPro
@@ -39,6 +39,11 @@ export default async function BillingPage({ searchParams }: PageProps<"/dashboar
       {checkout === "success" && isPro ? (
         <p role="status" className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-4 py-3 text-sm">
           You&apos;re on Pro. Every theme, unlimited links and click analytics are unlocked.
+        </p>
+      ) : null}
+      {profile.is_demo || demo ? (
+        <p role="status" className="rounded-lg border border-primary/30 bg-primary/5 px-4 py-3 text-sm">
+          This is the demo account, so billing is switched off. Sign up to try the real checkout with a test card.
         </p>
       ) : null}
       {checkout === "cancelled" ? (

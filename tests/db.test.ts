@@ -122,6 +122,21 @@ describe("privacy", () => {
   })
 })
 
+describe("demo account", () => {
+  it("cannot be changed by whoever is logged in as the demo", async () => {
+    await admin(`update public.profiles set is_demo = true where id = $1`, [MAYA])
+    await expect(as(MAYA, `update public.profiles set bio = 'defaced' where id = $1`, [MAYA])).rejects.toThrow(/read-only/)
+    await expect(as(MAYA, `insert into public.links (title, url) values ('spam', 'https://spam.example')`)).rejects.toThrow(/read-only/)
+    await expect(as(MAYA, `delete from public.links where user_id = $1`, [MAYA])).rejects.toThrow(/read-only/)
+    await expect(as(MAYA, `update public.profiles set is_demo = false where id = $1`, [MAYA])).rejects.toThrow(/read-only|permission denied/)
+  })
+
+  it("can still be written by the service role (seed script, webhook)", async () => {
+    await admin(`update public.profiles set bio = 'seeded' where id = $1`, [MAYA])
+    await admin(`update public.profiles set is_demo = false where id = $1`, [MAYA])
+  })
+})
+
 describe("usernames", () => {
   it("knows which names are free", async () => {
     const [row] = await as<{ taken: boolean; free: boolean; reserved: boolean }>(
