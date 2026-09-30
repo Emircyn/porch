@@ -39,8 +39,8 @@ export default function Home() {
             className="absolute inset-0 -z-10 bg-dots [mask-image:radial-gradient(ellipse_60%_70%_at_70%_40%,black,transparent)]"
           />
 
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-5 pt-14 pb-24 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pt-20 lg:pb-32">
-            <div className="flex flex-col items-start">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 pt-12 pb-16 sm:gap-14 sm:px-8 sm:pt-16 sm:pb-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pt-20 lg:pb-32">
+            <div className="flex flex-col items-start md:items-center md:text-center lg:items-start lg:text-left">
               <Link
                 href="#editor"
                 className={`${enter} group mb-6 inline-flex items-center rounded-full border bg-card/80 py-1 pr-1 pl-3 text-sm shadow-xs backdrop-blur transition-colors hover:border-primary/40`}
@@ -57,14 +57,14 @@ export default function Home() {
                 One link for everything you make
               </h1>
               <p
-                className={`${enter} mt-6 max-w-lg text-lg text-muted-foreground [--tw-animation-delay:160ms] sm:text-xl`}
+                className={`${enter} mt-6 max-w-lg text-lg text-muted-foreground [--tw-animation-delay:160ms] sm:text-xl md:mx-auto lg:mx-0`}
               >
                 Your photo, your links and a theme you like, on one page that looks right on every phone. Share it
                 in your bio, on your card, anywhere.
               </p>
-              <ClaimForm id="claim-hero" className={`${enter} mt-8 [--tw-animation-delay:240ms]`} />
+              <ClaimForm id="claim-hero" className={`${enter} mt-8 [--tw-animation-delay:240ms] md:mx-auto lg:mx-0`} />
               <ul
-                className={`${enter} mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground [--tw-animation-delay:300ms]`}
+                className={`${enter} mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground [--tw-animation-delay:300ms] md:justify-center lg:justify-start`}
               >
                 {[`Free for ${FREE_LINK_LIMIT} links`, "Live preview as you edit", "Dark mode built in"].map((item) => (
                   <li key={item} className="flex items-center gap-1.5">
