@@ -7,7 +7,10 @@ Built from idea to working MVP with Next.js, Supabase and Stripe, deployed on Cl
 
 **Live:** [porch.emircan-erdemci.workers.dev](https://porch.emircan-erdemci.workers.dev) · **One-click demo account:** [/demo](https://porch.emircan-erdemci.workers.dev/demo) (no sign-up) · Test card: `4242 4242 4242 4242`
 
-![Porch landing page](docs/cover.webp)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/hero-dark.webp">
+  <img src="docs/hero-light.webp" alt="Porch landing page">
+</picture>
 
 ## What it does
 
@@ -22,13 +25,40 @@ Built from idea to working MVP with Next.js, Supabase and Stripe, deployed on Cl
 - **Public pages at `/<username>`.** Cached, tiny, and quick in Instagram's and TikTok's in-app browsers.
 - **A read-only demo account** with 90 days of believable traffic, one click away.
 
-| Editor | Analytics |
-| --- | --- |
-| ![Editor](docs/editor.webp) | ![Analytics](docs/analytics.webp) |
+### On a phone
 
-| Themes | Public page, light and dark |
-| --- | --- |
-| ![Themes](docs/themes.webp) | ![Public page](docs/public-page.webp) |
+Every screen is built for phones first: the landing page, the editor (drag handles, a menu for each link,
+a Preview button), analytics and the public page.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/mobile-dark.webp">
+  <img src="docs/mobile-light.webp" alt="Porch on a phone: landing page, editor, analytics and a public page">
+</picture>
+
+### Editor and analytics
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/editor-dark.webp">
+  <img src="docs/editor-light.webp" alt="The editor with a live phone preview">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/analytics-dark.webp">
+  <img src="docs/analytics-light.webp" alt="Click analytics: clicks per day, per link, sources and countries">
+</picture>
+
+### Themes
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/themes-dark.webp">
+  <img src="docs/themes-light.webp" alt="Eleven themes, each shown on a different creator's page">
+</picture>
+
+The public page follows the visitor's own light or dark setting:
+
+![A public page in light and dark mode](docs/public-page.webp)
+
+<sub>Screenshots follow your GitHub theme: switch between light and dark to see both.</sub>
 
 ## Stack
 
