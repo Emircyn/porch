@@ -21,19 +21,19 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Footer">
-          <ul className="flex gap-6 text-sm">
+          <ul className="flex gap-4 text-sm">
             <li>
-              <Link href="/demo" className="hover:underline">
+              <Link href="/demo" className="inline-block py-1.5 hover:underline">
                 Demo
               </Link>
             </li>
             <li>
-              <Link href="/login" className="hover:underline">
+              <Link href="/login" className="inline-block py-1.5 hover:underline">
                 Log in
               </Link>
             </li>
             <li>
-              <Link href="/signup" className="hover:underline">
+              <Link href="/signup" className="inline-block py-1.5 hover:underline">
                 Sign up
               </Link>
             </li>

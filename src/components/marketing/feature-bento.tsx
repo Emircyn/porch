@@ -49,7 +49,7 @@ function BentoCard({
 }) {
   return (
     <li className={cn("flex flex-col overflow-hidden rounded-2xl border bg-card", className)}>
-      <div className="relative flex min-h-56 flex-1 items-center justify-center overflow-hidden border-b bg-muted/40 bg-dots p-6">
+      <div className="@container relative flex min-h-56 flex-1 items-center justify-center overflow-hidden border-b bg-muted/40 bg-dots p-6">
         {children}
       </div>
       <div className="flex flex-col gap-1.5 p-6">
@@ -153,7 +153,7 @@ function SortableRow({ id, title, url, position }: { id: string; title: string; 
         ref={setActivatorNodeRef}
         type="button"
         aria-label={`Move ${title}, position ${position}`}
-        className="flex h-8 w-6 cursor-grab touch-none items-center justify-center rounded-md text-muted-foreground hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none active:cursor-grabbing"
+        className="flex h-8 w-7 cursor-grab touch-none items-center justify-center rounded-md text-muted-foreground hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >
@@ -173,8 +173,8 @@ function ThemeDemo() {
   const { profile } = personaForTheme(themeId)
 
   return (
-    <div className="flex w-full items-center justify-center gap-4">
-      <div role="radiogroup" aria-label="Theme" className="grid grid-cols-4 gap-1.5">
+    <div className="flex w-full flex-col items-center justify-center gap-4 @xs:flex-row">
+      <div role="radiogroup" aria-label="Theme" className="grid grid-cols-6 gap-1.5 @xs:grid-cols-4">
         {themes.map((option) => (
           <button
             key={option.id}

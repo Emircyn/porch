@@ -150,7 +150,7 @@ export function ProfileView({
           {interactive ? (
             <a
               href={`/${profile.username}/report`}
-              className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+              className="inline-block px-2 py-1.5 text-xs text-muted-foreground underline-offset-4 hover:underline"
             >
               Report this page
             </a>

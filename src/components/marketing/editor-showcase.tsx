@@ -6,7 +6,7 @@ import { siteHost } from "@/lib/site"
 /** The real editor in demo mode, inside a browser window. Changes stay in the visitor's browser. */
 export function EditorShowcase() {
   return (
-    <div className="relative rounded-2xl border bg-card p-1.5 shadow-2xl shadow-primary/10 dark:shadow-black/40">
+    <div className="relative overflow-hidden rounded-2xl border bg-card p-1.5 shadow-2xl shadow-primary/10 dark:shadow-black/40">
       <div className="flex items-center gap-2 px-3 py-2" aria-hidden="true">
         <span className="size-2.5 rounded-full bg-muted-foreground/25" />
         <span className="size-2.5 rounded-full bg-muted-foreground/25" />

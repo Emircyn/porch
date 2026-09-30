@@ -16,13 +16,14 @@ export default async function DashboardLayout({ children }: LayoutProps<"/dashbo
   return (
     <div className="flex min-h-svh flex-1 flex-col">
       <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-4 px-5 sm:px-8">
+        {/* Phones: logo and account on one row, the section nav on its own row below. */}
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 px-5 sm:h-16 sm:flex-nowrap sm:px-8">
           <Link href="/dashboard" aria-label="Dashboard" className="rounded-lg">
             <Logo />
           </Link>
           {profile.plan === "pro" ? <Badge>Pro</Badge> : null}
-          <DashboardNav />
-          <div className="ml-auto flex items-center gap-1.5">
+          <DashboardNav className="order-last w-full border-t py-1.5 sm:order-none sm:w-auto sm:border-0 sm:py-0" />
+          <div className="ml-auto flex h-14 items-center gap-1.5 sm:h-auto">
             <ModeToggle />
             <UserMenu
               email={email}

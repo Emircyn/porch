@@ -195,7 +195,7 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
   }
 
   return (
-    <div className={cn("grid lg:grid-cols-[minmax(0,1fr)_auto]", className)}>
+    <div className={cn("grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto]", className)}>
       <div className={cn("flex min-w-0 flex-col gap-5 p-4 sm:p-6", mobileView === "preview" && "max-lg:hidden")}>
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
@@ -220,19 +220,20 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
               <Button
                 variant="ghost"
                 size="sm"
+                aria-label="Reset the demo"
                 onClick={() => {
                   dispatch({ type: "reset", state: initialState })
                   toast("Demo reset")
                 }}
               >
-                <RotateCcwIcon /> Reset
+                <RotateCcwIcon /> <span className="hidden sm:inline">Reset</span>
               </Button>
             ) : null}
             <Button variant="ghost" size="sm" onClick={exportPage} aria-label="Export your page as JSON">
               <DownloadIcon /> <span className="hidden sm:inline">Export</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={copyLink}>
-              <CopyIcon /> Copy link
+            <Button variant="outline" size="sm" onClick={copyLink} aria-label="Copy link to your page">
+              <CopyIcon /> <span className="hidden sm:inline">Copy link</span>
             </Button>
           </div>
         </div>
@@ -240,13 +241,13 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
         <Tabs defaultValue="links" className="gap-5">
           <TabsList className="w-full">
             <TabsTrigger value="links">
-              <LayoutListIcon /> Links
+              <LayoutListIcon className="max-sm:hidden" /> Links
             </TabsTrigger>
             <TabsTrigger value="appearance">
-              <PaletteIcon /> Appearance
+              <PaletteIcon className="max-sm:hidden" /> Appearance
             </TabsTrigger>
             <TabsTrigger value="analytics">
-              <BarChart3Icon /> Analytics
+              <BarChart3Icon className="max-sm:hidden" /> Analytics
             </TabsTrigger>
           </TabsList>
 

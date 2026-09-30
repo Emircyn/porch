@@ -39,7 +39,7 @@ export default function Home() {
             className="absolute inset-0 -z-10 bg-dots [mask-image:radial-gradient(ellipse_60%_70%_at_70%_40%,black,transparent)]"
           />
 
-          <div className="mx-auto grid max-w-6xl items-center gap-16 px-5 pt-14 pb-24 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pt-20 lg:pb-32">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-5 pt-14 pb-24 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pt-20 lg:pb-32">
             <div className="flex flex-col items-start">
               <Link
                 href="#editor"

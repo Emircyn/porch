@@ -21,6 +21,7 @@ import {
 import { CSS } from "@dnd-kit/utilities"
 import {
   CheckIcon,
+  EllipsisVerticalIcon,
   GripVerticalIcon,
   LinkIcon as LinkGlyph,
   PencilIcon,
@@ -43,6 +44,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
@@ -158,7 +166,7 @@ function SortableLinkRow({
         ref={setActivatorNodeRef}
         type="button"
         aria-label={`Reorder ${link.title}`}
-        className="flex h-10 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-md text-muted-foreground hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none active:cursor-grabbing"
+        className="flex h-10 w-7 shrink-0 cursor-grab touch-none items-center justify-center rounded-md text-muted-foreground hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >
@@ -166,7 +174,7 @@ function SortableLinkRow({
       </button>
       <span
         className={cn(
-          "flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted",
+          "flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted max-sm:hidden",
           !link.enabled && "opacity-50"
         )}
       >
@@ -192,8 +200,9 @@ function SortableLinkRow({
               !link.enabled && "opacity-60"
             )}
           >
-            <span className="flex items-center gap-1.5 truncate text-sm font-medium">
-              <span className="truncate">{link.title}</span>
+            <span className="flex items-center gap-1.5 text-sm font-medium sm:truncate">
+              {/* Two lines on phones, where the row is narrow; one line with an ellipsis on wider screens. */}
+              <span className="line-clamp-2 sm:line-clamp-1 sm:truncate">{link.title}</span>
               <PencilIcon className="size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
             </span>
             <span className="truncate text-xs text-muted-foreground">{link.url.replace(/^https?:\/\//, "")}</span>
@@ -206,7 +215,7 @@ function SortableLinkRow({
           <Button
             variant="ghost"
             size="icon"
-            className={cn("size-8", link.layout === "featured" ? "text-primary" : "text-muted-foreground")}
+            className={cn("size-8 max-sm:hidden", link.layout === "featured" ? "text-primary" : "text-muted-foreground")}
             onClick={() => onUpdate(link.id, { layout: link.layout === "featured" ? "classic" : "featured" })}
             aria-pressed={link.layout === "featured"}
             aria-label={link.layout === "featured" ? `Stop featuring ${link.title}` : `Feature ${link.title}`}
@@ -214,20 +223,43 @@ function SortableLinkRow({
           >
             <StarIcon className={cn(link.layout === "featured" && "fill-current")} />
           </Button>
+          {/* The switch keeps its size; an invisible layer makes it easy to hit with a thumb. */}
           <Switch
             checked={link.enabled}
             onCheckedChange={(enabled) => onUpdate(link.id, { enabled })}
             aria-label={link.enabled ? `Hide ${link.title}` : `Show ${link.title}`}
+            className="relative after:absolute after:-inset-3 after:content-['']"
           />
           <Button
             variant="ghost"
             size="icon"
-            className="size-8 text-muted-foreground hover:text-destructive"
+            className="size-8 text-muted-foreground hover:text-destructive max-sm:hidden"
             onClick={() => onRemove(link.id)}
             aria-label={`Delete ${link.title}`}
           >
             <Trash2Icon />
           </Button>
+          {/* Small screens: feature and delete move into one menu so the title has room. */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="size-9 text-muted-foreground sm:hidden" aria-label={`More for ${link.title}`}>
+                <EllipsisVerticalIcon />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onSelect={() => onUpdate(link.id, { layout: link.layout === "featured" ? "classic" : "featured" })}>
+                <StarIcon className={cn(link.layout === "featured" && "fill-current text-primary")} />
+                {link.layout === "featured" ? "Stop featuring" : "Feature as a big card"}
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setEditing(true)}>
+                <PencilIcon /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive" onSelect={() => onRemove(link.id)}>
+                <Trash2Icon /> Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </>
       )}
     </li>
