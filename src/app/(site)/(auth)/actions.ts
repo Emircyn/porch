@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
-import { z } from "zod"
+import * as z from "zod/mini"
 
 import { createClient } from "@/lib/supabase/server"
 import { usernameSchema } from "@/lib/usernames"
@@ -25,7 +25,7 @@ async function siteOrigin() {
   return fromHeader ?? process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
 }
 
-const emailSchema = z.email("Enter a valid e-mail address.").trim().toLowerCase()
+const emailSchema = z.pipe(z.string().check(z.trim(), z.toLowerCase()), z.email("Enter a valid e-mail address."))
 
 export async function signIn(_: AuthState, formData: FormData): Promise<AuthState> {
   const email = emailSchema.safeParse(formData.get("email"))
@@ -55,7 +55,7 @@ export async function signIn(_: AuthState, formData: FormData): Promise<AuthStat
 const signUpSchema = z.object({
   username: usernameSchema,
   email: emailSchema,
-  password: z.string().min(8, "Use at least 8 characters.").max(72, "Use 72 characters or fewer."),
+  password: z.string().check(z.minLength(8, "Use at least 8 characters."), z.maxLength(72, "Use 72 characters or fewer.")),
 })
 
 export async function signUp(_: AuthState, formData: FormData): Promise<AuthState> {

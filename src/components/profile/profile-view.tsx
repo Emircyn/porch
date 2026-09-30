@@ -223,7 +223,7 @@ function FeaturedLink({ link, href }: { link: PublicLink; href?: string }) {
       <span className="flex w-full items-end justify-between gap-3">
         <span className="flex min-w-0 flex-col gap-0.5">
           <LinkTitle className="text-base font-bold">{link.title}</LinkTitle>
-          <span className="truncate text-xs opacity-80">{hostOf(link.url)}</span>
+          <span className="truncate text-xs">{hostOf(link.url)}</span>
         </span>
         <ArrowUpRightIcon className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </span>

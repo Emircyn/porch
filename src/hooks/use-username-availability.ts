@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { createClient } from "@/lib/supabase/client"
+import { isUsernameAvailable } from "@/app/(site)/(auth)/username"
 import { usernameSchema } from "@/lib/usernames"
 
 type Availability = { name: string; status: "available" | "taken" } | null
@@ -17,9 +17,9 @@ export function useUsernameAvailability(raw: string) {
     if (!name) return
     let cancelled = false
     const timer = setTimeout(async () => {
-      const { data } = await createClient().rpc("username_available", { name })
-      if (!cancelled && typeof data === "boolean") {
-        setResult({ name, status: data ? "available" : "taken" })
+      const available = await isUsernameAvailable(name)
+      if (!cancelled && available !== null) {
+        setResult({ name, status: available ? "available" : "taken" })
       }
     }, 350)
     return () => {

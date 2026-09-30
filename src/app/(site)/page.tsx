@@ -5,7 +5,7 @@ import { ClaimForm } from "@/components/marketing/claim-form"
 import { Faq } from "@/components/marketing/faq"
 import { FeatureBento } from "@/components/marketing/feature-bento"
 import { Pricing } from "@/components/marketing/pricing"
-import { EditorShowcase } from "@/components/marketing/editor-showcase"
+import { LazyEditorShowcase } from "@/components/marketing/lazy-editor-showcase"
 import { HeroPhone } from "@/components/marketing/hero-phone"
 import { SiteFooter } from "@/components/marketing/site-footer"
 import { SiteHeader } from "@/components/marketing/site-header"
@@ -52,7 +52,7 @@ export default function Home() {
               </Link>
 
               <h1
-                className={`${enter} text-5xl leading-[1.02] font-semibold tracking-tighter [--tw-animation-delay:80ms] sm:text-6xl lg:text-[4.25rem]`}
+                className="text-5xl leading-[1.02] font-semibold tracking-tighter sm:text-6xl lg:text-[4.25rem]"
               >
                 One link for everything you make
               </h1>
@@ -92,7 +92,7 @@ export default function Home() {
             body="This is the real thing, running on Maya's demo page. Drag links, switch themes, open the stats. Nothing is saved."
           />
           <div className="mx-auto mt-14 max-w-6xl">
-            <EditorShowcase />
+            <LazyEditorShowcase />
           </div>
         </section>
 
@@ -114,7 +114,7 @@ export default function Home() {
         <section
           id="themes"
           aria-labelledby="themes-heading"
-          className="scroll-mt-20 border-y bg-muted/30 py-24 sm:py-32"
+          className="scroll-mt-20 border-y bg-muted/30 py-24 [contain-intrinsic-size:auto_900px] [content-visibility:auto] sm:py-32"
         >
           <div className="px-5 sm:px-8">
             <SectionHeading
@@ -131,7 +131,7 @@ export default function Home() {
         <section
           id="pricing"
           aria-labelledby="pricing-heading"
-          className="mx-auto w-full max-w-4xl scroll-mt-20 px-5 py-24 sm:px-8 sm:py-32"
+          className="mx-auto w-full max-w-4xl scroll-mt-20 px-5 py-24 [contain-intrinsic-size:auto_800px] [content-visibility:auto] sm:px-8 sm:py-32"
         >
           <SectionHeading
             id="pricing-heading"
@@ -146,7 +146,7 @@ export default function Home() {
         <section
           id="faq"
           aria-labelledby="faq-heading"
-          className="mx-auto w-full max-w-3xl scroll-mt-20 px-5 pb-24 sm:px-8 sm:pb-32"
+          className="mx-auto w-full max-w-3xl scroll-mt-20 px-5 pb-24 [contain-intrinsic-size:auto_700px] [content-visibility:auto] sm:px-8 sm:pb-32"
         >
           <SectionHeading
             id="faq-heading"

@@ -31,7 +31,7 @@ import { cn } from "@/lib/utils"
 
 import { AppearancePanel } from "./appearance-panel"
 import type { ClickStats } from "./analytics-panel"
-import { squareWebp, uploadAvatar } from "@/lib/avatar-upload"
+import { squareWebp } from "@/lib/avatar-upload"
 import type { SocialLink } from "@/lib/demo-profile"
 
 import { editorReducer, type EditorAction, type EditorState } from "./editor-state"
@@ -58,6 +58,7 @@ export type EditorPersistence = Pick<
   | "saveTheme"
   | "saveSocials"
   | "saveAvatar"
+  | "uploadAvatarPhoto"
   | "addLink"
   | "updateLink"
   | "deleteLink"
@@ -154,8 +155,11 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
         dispatch({ type: "avatar", avatarUrl: URL.createObjectURL(blob) })
         return
       }
-      const url = await uploadAvatar(blob)
-      change({ type: "avatar", avatarUrl: url }, (p) => p.saveAvatar(url))
+      const form = new FormData()
+      form.append("photo", blob, "avatar.webp")
+      const result = await persistence.uploadAvatarPhoto(form)
+      if (result.error || !result.url) throw new Error(result.error ?? "The upload didn't go through. Try again.")
+      dispatch({ type: "avatar", avatarUrl: result.url })
       toast.success("Photo updated")
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Couldn't use that photo")

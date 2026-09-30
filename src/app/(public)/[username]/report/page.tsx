@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { z } from "zod"
+import * as z from "zod/mini"
 
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
@@ -21,9 +21,9 @@ async function report(formData: FormData) {
   "use server"
   const parsed = z
     .object({
-      username: z.string().min(1).max(30),
+      username: z.string().check(z.minLength(1), z.maxLength(30)),
       reason: z.enum(["phishing", "impersonation", "spam", "adult", "other"]),
-      details: z.string().max(500).optional(),
+      details: z.optional(z.string().check(z.maxLength(500))),
     })
     .safeParse({
       username: formData.get("username"),

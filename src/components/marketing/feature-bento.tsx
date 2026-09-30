@@ -246,7 +246,7 @@ function StatsDemo() {
               }}
               className={cn(
                 "rounded-md px-2 py-1 font-medium transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-                option === range ? "bg-background shadow-xs" : "text-muted-foreground hover:text-foreground"
+                option === range ? "bg-background shadow-xs" : "text-foreground/75 hover:text-foreground"
               )}
             >
               {option}d
@@ -254,28 +254,37 @@ function StatsDemo() {
           ))}
         </div>
       </div>
-      <div className="flex h-24 items-end gap-[2px]" onMouseLeave={() => setActive(null)}>
+      {/* One touch surface for the whole chart: 30 bars are too thin to tap one by one. */}
+      <div
+        role="img"
+        aria-label={`Clicks per day over the last ${range} days, ${total} in total, peaking at ${peak}.`}
+        className="flex h-24 cursor-crosshair touch-none items-end gap-[2px]"
+        onPointerMove={(event) => {
+          const box = event.currentTarget.getBoundingClientRect()
+          setActive(Math.min(days.length - 1, Math.max(0, Math.floor(((event.clientX - box.left) / box.width) * days.length))))
+        }}
+        onPointerDown={(event) => {
+          const box = event.currentTarget.getBoundingClientRect()
+          setActive(Math.min(days.length - 1, Math.max(0, Math.floor(((event.clientX - box.left) / box.width) * days.length))))
+        }}
+        onPointerLeave={() => setActive(null)}
+      >
         {days.map((day, index) => (
-          <button
+          <span
             key={day.day}
-            type="button"
-            aria-label={`${dateLabel.format(new Date(day.day))}: ${day.clicks} clicks`}
-            onMouseEnter={() => setActive(index)}
-            onFocus={() => setActive(index)}
-            onBlur={() => setActive(null)}
-            onClick={() => setActive(index === active ? null : index)}
-            className="group flex h-full flex-1 items-end focus-visible:outline-none"
-          >
-            <span
-              className={cn(
-                "w-full rounded-t-[4px] transition-colors group-focus-visible:ring-2 group-focus-visible:ring-ring",
-                active === null || active === index ? "bg-primary" : "bg-primary/30"
-              )}
-              style={{ height: `${(day.clicks / peak) * 100}%` }}
-            />
-          </button>
+            className={cn(
+              "flex-1 rounded-t-[4px] transition-colors",
+              active === null || active === index ? "bg-primary" : "bg-primary/30"
+            )}
+            style={{ height: `${(day.clicks / peak) * 100}%` }}
+          />
         ))}
       </div>
+      <ul className="sr-only">
+        {days.map((day) => (
+          <li key={day.day}>{`${dateLabel.format(new Date(day.day))}: ${day.clicks} clicks`}</li>
+        ))}
+      </ul>
     </div>
   )
 }

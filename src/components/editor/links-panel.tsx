@@ -29,7 +29,7 @@ import {
   Trash2Icon,
 } from "lucide-react"
 import { useId, useState } from "react"
-import { z } from "zod"
+import * as z from "zod/mini"
 
 import { LinkIcon } from "@/components/profile/link-icon"
 import { Badge } from "@/components/ui/badge"
@@ -53,12 +53,14 @@ import { suggestTitle } from "@/lib/suggest-title"
 import { cn } from "@/lib/utils"
 
 const linkSchema = z.object({
-  title: z.string().trim().min(1, "Give the link a title.").max(80, "Keep it under 80 characters."),
-  url: z
-    .string()
-    .trim()
-    .transform((value) => (/^https?:\/\//i.test(value) ? value : `https://${value}`))
-    .pipe(z.url({ protocol: /^https?$/, message: "Enter a web address, like example.com." })),
+  title: z.string().check(z.trim(), z.minLength(1, "Give the link a title."), z.maxLength(80, "Keep it under 80 characters.")),
+  url: z.pipe(
+    z.pipe(
+      z.string().check(z.trim()),
+      z.transform((value: string) => (/^https?:\/\//i.test(value) ? value : `https://${value}`))
+    ),
+    z.url({ protocol: /^https?$/, error: "Enter a web address, like example.com." })
+  ),
 })
 
 export type LinkInput = z.infer<typeof linkSchema>

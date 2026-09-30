@@ -1,10 +1,10 @@
-import { z } from "zod"
+import * as z from "zod/mini"
 
 import { createAnonClient } from "@/lib/public-page"
 
 const body = z.object({
   id: z.uuid(),
-  ref: z.string().max(255).optional(),
+  ref: z.optional(z.string().check(z.maxLength(255))),
 })
 
 const bots = /bot|crawl|spider|slurp|facebookexternalhit|preview|monitor/i
