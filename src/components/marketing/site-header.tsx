@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MenuIcon } from "lucide-react"
 
+import { DemoLink } from "@/components/demo-link"
 import { Logo } from "@/components/logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
@@ -42,6 +43,9 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-1.5">
           <ModeToggle />
+          <Button variant="outline" asChild className="hidden md:inline-flex">
+            <DemoLink>Live demo</DemoLink>
+          </Button>
           <Button variant="ghost" asChild className="hidden sm:inline-flex">
             <Link href="/login">Log in</Link>
           </Button>
@@ -67,14 +71,18 @@ export function SiteHeader() {
               </SheetHeader>
               <nav aria-label="Mobile" className="px-4">
                 <ul className="flex flex-col gap-1">
-                  {[...nav, { href: "/login", label: "Log in" }].map((item) => (
+                  {[...nav, { href: "/demo", label: "Live demo" }, { href: "/login", label: "Log in" }].map((item) => (
                     <li key={item.href}>
                       <Button
                         variant="ghost"
                         asChild
                         className="w-full justify-start text-base"
                       >
-                        <Link href={item.href}>{item.label}</Link>
+                        {item.href === "/demo" ? (
+                          <DemoLink>{item.label}</DemoLink>
+                        ) : (
+                          <Link href={item.href}>{item.label}</Link>
+                        )}
                       </Button>
                     </li>
                   ))}

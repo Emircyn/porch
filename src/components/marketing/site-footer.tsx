@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { DemoLink } from "@/components/demo-link"
 import { Logo } from "@/components/logo"
 
 export function SiteFooter() {
@@ -23,9 +24,9 @@ export function SiteFooter() {
         <nav aria-label="Footer">
           <ul className="flex gap-4 text-sm">
             <li>
-              <Link href="/demo" className="inline-block py-1.5 hover:underline">
+              <DemoLink className="inline-block py-1.5 hover:underline">
                 Demo
-              </Link>
+              </DemoLink>
             </li>
             <li>
               <Link href="/login" className="inline-block py-1.5 hover:underline">

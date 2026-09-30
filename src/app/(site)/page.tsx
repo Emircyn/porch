@@ -1,6 +1,7 @@
-import { ChevronRightIcon, CircleCheckIcon } from "lucide-react"
+import { ChevronRightIcon, CircleCheckIcon, MonitorPlayIcon } from "lucide-react"
 import Link from "next/link"
 
+import { DemoLink } from "@/components/demo-link"
 import { ClaimForm } from "@/components/marketing/claim-form"
 import { Faq } from "@/components/marketing/faq"
 import { FeatureBento } from "@/components/marketing/feature-bento"
@@ -11,6 +12,7 @@ import { SiteFooter } from "@/components/marketing/site-footer"
 import { SiteHeader } from "@/components/marketing/site-header"
 import { ThemeMarquee } from "@/components/marketing/theme-marquee"
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text"
+import { Button } from "@/components/ui/button"
 import { FREE_LINK_LIMIT, PRO_PRICE_USD } from "@/lib/plans"
 import { themes } from "@/lib/themes"
 
@@ -63,6 +65,17 @@ export default function Home() {
                 in your bio, on your card, anywhere.
               </p>
               <ClaimForm id="claim-hero" className={`${enter} mt-8 [--tw-animation-delay:240ms] md:mx-auto lg:mx-0`} />
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className={`${enter} mt-3 h-11 w-full max-w-md rounded-xl [--tw-animation-delay:270ms] md:mx-auto lg:mx-0`}
+              >
+                <DemoLink>
+                  <MonitorPlayIcon /> Explore the live demo
+                  <span className="font-normal text-muted-foreground">(no sign-up)</span>
+                </DemoLink>
+              </Button>
               <ul
                 className={`${enter} mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground [--tw-animation-delay:300ms] md:justify-center lg:justify-start`}
               >
@@ -93,6 +106,16 @@ export default function Home() {
           />
           <div className="mx-auto mt-14 max-w-6xl">
             <LazyEditorShowcase />
+          </div>
+          <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-3 text-center">
+            <Button asChild size="lg" className="h-11 rounded-xl px-6">
+              <DemoLink>
+                <MonitorPlayIcon /> Open the full demo
+              </DemoLink>
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              Signs you in as Maya: analytics with 90 days of visits, billing, the lot. Nothing you change is saved.
+            </p>
           </div>
         </section>
 
