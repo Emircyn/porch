@@ -5,9 +5,9 @@ import { useActionState, useState } from "react"
 
 import { SubmitButton } from "@/app/(site)/(auth)/submit-button"
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
+import { HostPrefix } from "@/components/host-prefix"
 import { Spinner } from "@/components/ui/spinner"
 import { useUsernameAvailability } from "@/hooks/use-username-availability"
-import { siteHost } from "@/lib/site"
 
 import { chooseUsername, type OnboardingState } from "./actions"
 
@@ -25,7 +25,7 @@ export function OnboardingForm({ initialUsername }: { initialUsername?: string }
       <Field data-invalid={!!error}>
         <FieldLabel htmlFor="username">Page name</FieldLabel>
         <div className="flex h-11 items-center rounded-md border border-input pl-3 shadow-xs focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-[[aria-invalid=true]]:border-destructive dark:bg-input/30">
-          <span className="shrink-0 text-muted-foreground select-none">{siteHost}/</span>
+          <HostPrefix className="max-w-[60%]" />
           <input
             id="username"
             name="username"

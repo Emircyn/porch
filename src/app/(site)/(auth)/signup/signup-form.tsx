@@ -5,6 +5,7 @@ import { useActionState, useState } from "react"
 
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { HostPrefix } from "@/components/host-prefix"
 import { Spinner } from "@/components/ui/spinner"
 import { siteHost } from "@/lib/site"
 import { useUsernameAvailability } from "@/hooks/use-username-availability"
@@ -49,7 +50,7 @@ export function SignupForm({ initialUsername, next }: { initialUsername?: string
         <Field data-invalid={!!usernameError}>
           <FieldLabel htmlFor="username">Page name</FieldLabel>
           <div className="flex h-11 items-center rounded-md border border-input bg-transparent pl-3 shadow-xs transition-[color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-[[aria-invalid=true]]:border-destructive dark:bg-input/30">
-            <span className="shrink-0 text-muted-foreground select-none">{siteHost}/</span>
+            <HostPrefix className="max-w-[60%]" />
             <input
               id="username"
               name="username"

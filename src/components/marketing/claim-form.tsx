@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { siteHost } from "@/lib/site"
+import { HostPrefix } from "@/components/host-prefix"
 import { cn } from "@/lib/utils"
 
 /** Works without JavaScript: a GET form that carries the chosen name to sign-up. */
@@ -16,7 +16,7 @@ export function ClaimForm({ id, className }: { id: string; className?: string })
       <label htmlFor={id} className="sr-only">
         Choose your page name
       </label>
-      <span className="shrink-0 pl-2.5 text-muted-foreground select-none">{siteHost}/</span>
+      <HostPrefix className="max-w-[55%] pl-2.5" />
       <input
         id={id}
         name="username"
@@ -26,7 +26,7 @@ export function ClaimForm({ id, className }: { id: string; className?: string })
         spellCheck={false}
         pattern="[a-zA-Z0-9_.]{3,30}"
         title="3 to 30 letters, numbers, dots or underscores"
-        className="h-10 min-w-0 flex-1 bg-transparent font-medium outline-none placeholder:text-muted-foreground/60"
+        className="h-10 min-w-24 flex-1 bg-transparent font-medium outline-none placeholder:text-muted-foreground/60"
       />
       <Button type="submit" className="h-10 shrink-0 rounded-lg px-4">
         Claim it
