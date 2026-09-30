@@ -12,7 +12,7 @@ import { useUsernameAvailability } from "@/hooks/use-username-availability"
 import { signUp, type AuthState } from "../actions"
 import { SubmitButton } from "../submit-button"
 
-export function SignupForm({ initialUsername }: { initialUsername?: string }) {
+export function SignupForm({ initialUsername, next }: { initialUsername?: string; next?: string }) {
   const [state, action] = useActionState<AuthState, FormData>(signUp, null)
   const [username, setUsername] = useState(state?.values?.username ?? initialUsername ?? "")
   const availability = useUsernameAvailability(username)
@@ -39,6 +39,7 @@ export function SignupForm({ initialUsername }: { initialUsername?: string }) {
 
   return (
     <form action={action} noValidate>
+      {next ? <input type="hidden" name="next" value={next} /> : null}
       <FieldGroup className="gap-5">
         {state?.error ? (
           <p role="alert" className="rounded-lg bg-destructive/10 px-3 py-2.5 text-sm text-destructive">

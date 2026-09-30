@@ -51,13 +51,13 @@ isOneToOne: false
                   ]
                 },"profiles": {
                   Row: {
-                    "avatar_url": string | null,"bio": string,"created_at": string,"current_period_end": string | null,"display_name": string,"id": string,"plan": string,"socials": NonNullable<Json>,"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": string | null,"theme_id": string,"updated_at": string,"username": string | null
+                    "avatar_url": string | null,"bio": string,"cancel_at_period_end": boolean,"created_at": string,"current_period_end": string | null,"display_name": string,"id": string,"plan": string,"socials": NonNullable<Json>,"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": string | null,"theme_id": string,"updated_at": string,"username": string | null
                   }
                   Insert: {
-                    "avatar_url"?: string | null,"bio"?: string,"created_at"?: string,"current_period_end"?: string | null,"display_name"?: string,"id": string,"plan"?: string,"socials"?: NonNullable<Json>,"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: string | null,"theme_id"?: string,"updated_at"?: string,"username"?: string | null
+                    "avatar_url"?: string | null,"bio"?: string,"cancel_at_period_end"?: boolean,"created_at"?: string,"current_period_end"?: string | null,"display_name"?: string,"id": string,"plan"?: string,"socials"?: NonNullable<Json>,"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: string | null,"theme_id"?: string,"updated_at"?: string,"username"?: string | null
                   }
                   Update: {
-                    "avatar_url"?: string | null,"bio"?: string,"created_at"?: string,"current_period_end"?: string | null,"display_name"?: string,"id"?: string,"plan"?: string,"socials"?: NonNullable<Json>,"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: string | null,"theme_id"?: string,"updated_at"?: string,"username"?: string | null
+                    "avatar_url"?: string | null,"bio"?: string,"cancel_at_period_end"?: boolean,"created_at"?: string,"current_period_end"?: string | null,"display_name"?: string,"id"?: string,"plan"?: string,"socials"?: NonNullable<Json>,"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: string | null,"theme_id"?: string,"updated_at"?: string,"username"?: string | null
                   }
                   Relationships: [
                     

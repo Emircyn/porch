@@ -6,6 +6,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { Badge } from "@/components/ui/badge"
 import { getCurrentProfile } from "@/lib/profile"
 
+import { DashboardNav } from "./dashboard-nav"
 import { UserMenu } from "./user-menu"
 
 export default async function DashboardLayout({ children }: LayoutProps<"/dashboard">) {
@@ -19,9 +20,8 @@ export default async function DashboardLayout({ children }: LayoutProps<"/dashbo
           <Link href="/dashboard" aria-label="Dashboard" className="rounded-lg">
             <Logo />
           </Link>
-          {profile.plan === "pro" ? (
-            <Badge>Pro</Badge>
-          ) : null}
+          {profile.plan === "pro" ? <Badge>Pro</Badge> : null}
+          <DashboardNav />
           <div className="ml-auto flex items-center gap-1.5">
             <ModeToggle />
             <UserMenu

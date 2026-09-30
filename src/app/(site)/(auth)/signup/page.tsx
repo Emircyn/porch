@@ -10,9 +10,11 @@ import { SignupForm } from "./signup-form"
 export const metadata: Metadata = { title: "Create your page" }
 
 export default async function SignupPage({ searchParams }: PageProps<"/signup">) {
-  const { username } = await searchParams
+  const { username, plan } = await searchParams
+  // "Get Pro" on the pricing table: after sign-up, go straight to checkout.
+  const next = plan === "pro" ? "/dashboard/billing" : undefined
   const initialUsername = typeof username === "string" ? username.toLowerCase().slice(0, 30) : undefined
-  const oauthNext = initialUsername ? `/onboarding?username=${encodeURIComponent(initialUsername)}` : "/onboarding"
+  const oauthNext = next ?? (initialUsername ? `/onboarding?username=${encodeURIComponent(initialUsername)}` : "/onboarding")
 
   return (
     <div className="flex flex-col gap-6">
@@ -24,7 +26,7 @@ export default async function SignupPage({ searchParams }: PageProps<"/signup">)
       </div>
       <GitHubButton next={oauthNext} />
       <FieldSeparator>or</FieldSeparator>
-      <SignupForm initialUsername={initialUsername} />
+      <SignupForm initialUsername={initialUsername} next={next} />
       <p className="text-center text-sm text-muted-foreground">
         Already have a page?{" "}
         <Link href="/login" className="font-medium text-foreground underline underline-offset-4">

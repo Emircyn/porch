@@ -99,7 +99,7 @@ export async function signUp(_: AuthState, formData: FormData): Promise<AuthStat
 
   // With e-mail confirmation on, there is no session until the link is opened.
   if (!data.session) return { checkEmail: parsed.data.email }
-  redirect("/dashboard")
+  redirect(safeNext(formData.get("next")))
 }
 
 export async function signInWithGitHub(formData: FormData) {
