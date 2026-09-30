@@ -122,6 +122,18 @@ describe("privacy", () => {
   })
 })
 
+describe("profile photos", () => {
+  it("only accepts photos from the owner's own avatars folder", async () => {
+    const own = `https://x.supabase.co/storage/v1/object/public/avatars/${OTHER}/avatar.webp?v=1`
+    const foreign = `https://x.supabase.co/storage/v1/object/public/avatars/${MAYA}/avatar.webp`
+    const [row] = await as<{ avatar_url: string }>(OTHER, `update public.profiles set avatar_url = $1 where id = $2 returning avatar_url`, [own, OTHER])
+    expect(row.avatar_url).toBe(own)
+    await expect(as(OTHER, `update public.profiles set avatar_url = $1 where id = $2`, [foreign, OTHER])).rejects.toThrow(/uploaded to Porch/)
+    await expect(as(OTHER, `update public.profiles set avatar_url = 'https://evil.example/pixel.gif' where id = $1`, [OTHER])).rejects.toThrow(/uploaded to Porch/)
+    await as(OTHER, `update public.profiles set avatar_url = null where id = $1`, [OTHER])
+  })
+})
+
 describe("demo account", () => {
   it("cannot be changed by whoever is logged in as the demo", async () => {
     await admin(`update public.profiles set is_demo = true where id = $1`, [MAYA])

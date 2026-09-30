@@ -1,4 +1,4 @@
-import type { EditorLink, PublicProfile } from "@/lib/demo-profile"
+import type { EditorLink, PublicProfile, SocialLink } from "@/lib/demo-profile"
 import type { ThemeId } from "@/lib/themes"
 
 export type EditorState = {
@@ -9,6 +9,8 @@ export type EditorState = {
 export type EditorAction =
   | { type: "profile"; patch: Partial<Pick<PublicProfile, "displayName" | "bio">> }
   | { type: "theme"; themeId: ThemeId }
+  | { type: "avatar"; avatarUrl: string | null }
+  | { type: "socials"; socials: SocialLink[] }
   | { type: "add-link"; link: EditorLink }
   | { type: "update-link"; id: string; patch: Partial<Omit<EditorLink, "id">> }
   | { type: "remove-link"; id: string }
@@ -22,6 +24,10 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       return { ...state, profile: { ...state.profile, ...action.patch } }
     case "theme":
       return { ...state, profile: { ...state.profile, themeId: action.themeId } }
+    case "avatar":
+      return { ...state, profile: { ...state.profile, avatarUrl: action.avatarUrl } }
+    case "socials":
+      return { ...state, profile: { ...state.profile, socials: action.socials } }
     case "add-link":
       // New links go to the top, where people look first.
       return { ...state, links: [action.link, ...state.links] }

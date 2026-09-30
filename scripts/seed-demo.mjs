@@ -74,6 +74,7 @@ const linkRows = [
 ]
 const { data: links, error: linksError } = await admin
   .from("links")
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- weight only drives the fake clicks
   .insert(linkRows.map(({ weight, ...row }, position) => ({ ...row, position, user_id: userId })))
   .select("id")
 if (linksError) throw linksError

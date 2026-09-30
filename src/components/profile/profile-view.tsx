@@ -104,6 +104,21 @@ export function ProfileView({
           </ul>
         ) : null}
 
+        {!interactive && links.length === 0 ? (
+          // Editor preview of a brand-new page: show where links will go instead of an empty screen.
+          <div className="mt-7 flex w-full flex-col gap-3" aria-hidden="true">
+            {["Your first link", "Your second link", "And so on"].map((label, index) => (
+              <div
+                key={label}
+                className="rounded-lg border-2 border-dashed p-4 text-center text-sm font-medium text-muted-foreground"
+                style={{ opacity: 1 - index * 0.3 }}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+        ) : null}
+
         <ul className="mt-7 flex w-full flex-col gap-3">
           {links.map((link) => (
             <li key={link.id}>

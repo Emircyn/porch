@@ -31,6 +31,9 @@ import { cn } from "@/lib/utils"
 
 import { AppearancePanel } from "./appearance-panel"
 import type { ClickStats } from "./analytics-panel"
+import { squareWebp, uploadAvatar } from "@/lib/avatar-upload"
+import type { SocialLink } from "@/lib/demo-profile"
+
 import { editorReducer, type EditorAction, type EditorState } from "./editor-state"
 import { LinksPanel } from "./links-panel"
 
@@ -51,7 +54,15 @@ const AnalyticsPanel = dynamic(() => import("./analytics-panel"), {
 
 export type EditorPersistence = Pick<
   typeof DashboardActions,
-  "saveProfile" | "saveTheme" | "addLink" | "updateLink" | "deleteLink" | "restoreLink" | "reorderLinks"
+  | "saveProfile"
+  | "saveTheme"
+  | "saveSocials"
+  | "saveAvatar"
+  | "addLink"
+  | "updateLink"
+  | "deleteLink"
+  | "restoreLink"
+  | "reorderLinks"
 >
 
 type EditorProps = {
@@ -70,6 +81,8 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
   const stateRef = useRef(state)
   const [pending, setPending] = useState(0)
   const profileTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const socialsTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [uploadingAvatar, setUploadingAvatar] = useState(false)
 
   useEffect(() => {
     stateRef.current = state
@@ -111,6 +124,44 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
         .then((result) => result.error && toast.error(result.error))
         .finally(() => setPending((count) => count - 1))
     }, 700)
+  }
+
+  function changeSocials(socials: SocialLink[]) {
+    dispatch({ type: "socials", socials })
+    if (!persistence) return
+    if (socialsTimer.current) clearTimeout(socialsTimer.current)
+    socialsTimer.current = setTimeout(() => {
+      // Rows still waiting for an address aren't saved yet.
+      const complete = stateRef.current.profile.socials.filter((social) => /^https?:\/\/.+\..+/.test(social.url))
+      setPending((count) => count + 1)
+      persistence
+        .saveSocials(complete)
+        .then((result) => result.error && toast.error(result.error))
+        .finally(() => setPending((count) => count - 1))
+    }, 800)
+  }
+
+  async function changeAvatar(file: File | null) {
+    if (!file) {
+      change({ type: "avatar", avatarUrl: null }, (p) => p.saveAvatar(null))
+      return
+    }
+    setUploadingAvatar(true)
+    try {
+      const blob = await squareWebp(file)
+      if (!persistence) {
+        // Demo: show the photo, keep it in this browser.
+        dispatch({ type: "avatar", avatarUrl: URL.createObjectURL(blob) })
+        return
+      }
+      const url = await uploadAvatar(blob)
+      change({ type: "avatar", avatarUrl: url }, (p) => p.saveAvatar(url))
+      toast.success("Photo updated")
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Couldn't use that photo")
+    } finally {
+      setUploadingAvatar(false)
+    }
   }
 
   function exportPage() {
@@ -232,7 +283,10 @@ export function Editor({ initialState, plan, stats, persistence, demo = false, c
             <AppearancePanel
               profile={state.profile}
               plan={plan}
+              uploadingAvatar={uploadingAvatar}
               onProfileChange={changeProfile}
+              onAvatarChange={changeAvatar}
+              onSocialsChange={changeSocials}
               onThemeChange={(themeId) => change({ type: "theme", themeId }, (p) => p.saveTheme(themeId))}
             />
           </TabsContent>

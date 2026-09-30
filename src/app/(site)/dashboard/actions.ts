@@ -5,6 +5,8 @@ import { z } from "zod"
 
 import { getCurrentProfile } from "@/lib/profile"
 import { createClient } from "@/lib/supabase/server"
+import { platforms } from "@/lib/platforms"
+import { supabaseUrl } from "@/lib/supabase/env"
 import { themes } from "@/lib/themes"
 
 export type ActionResult = { error?: string }
@@ -91,4 +93,23 @@ export async function restoreLink(input: {
 export async function reorderLinks(ids: string[]): Promise<ActionResult> {
   if (!z.array(z.uuid()).max(500).safeParse(ids).success) return { error: "Couldn't save the new order." }
   return run(({ supabase }) => supabase.rpc("reorder_links", { link_ids: ids }))
+}
+
+const platformIds = platforms.map((platform) => platform.id) as [string, ...string[]]
+
+export async function saveSocials(socials: { platform: string; url: string }[]): Promise<ActionResult> {
+  const parsed = z
+    .array(z.object({ platform: z.enum(platformIds), url: z.url({ protocol: /^https?$/ }).max(300) }))
+    .max(8)
+    .safeParse(socials)
+  if (!parsed.success) return { error: "Check your social links: each needs a full address." }
+  return run(({ supabase, userId }) => supabase.from("profiles").update({ socials: parsed.data }).eq("id", userId))
+}
+
+/** Only accepts a file in the user's own avatars folder, so nobody can point their photo at someone else's. */
+export async function saveAvatar(url: string | null): Promise<ActionResult> {
+  const { profile } = await getCurrentProfile()
+  const prefix = `${supabaseUrl}/storage/v1/object/public/avatars/${profile.id}/`
+  if (url !== null && (!url.startsWith(prefix) || url.length > 500)) return { error: "That photo can't be used." }
+  return run(({ supabase, userId }) => supabase.from("profiles").update({ avatar_url: url }).eq("id", userId))
 }

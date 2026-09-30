@@ -10,7 +10,17 @@ import { loadStats } from "@/lib/stats"
 import { createClient } from "@/lib/supabase/server"
 import { getTheme } from "@/lib/themes"
 
-import { addLink, deleteLink, reorderLinks, restoreLink, saveProfile, saveTheme, updateLink } from "./actions"
+import {
+  addLink,
+  deleteLink,
+  reorderLinks,
+  restoreLink,
+  saveAvatar,
+  saveProfile,
+  saveSocials,
+  saveTheme,
+  updateLink,
+} from "./actions"
 
 export const metadata: Metadata = { title: "Your page" }
 
@@ -66,7 +76,17 @@ export default async function DashboardPage() {
           persistence={
             profile.is_demo
               ? undefined
-              : { saveProfile, saveTheme, addLink, updateLink, deleteLink, restoreLink, reorderLinks }
+              : {
+                  saveProfile,
+                  saveTheme,
+                  saveSocials,
+                  saveAvatar,
+                  addLink,
+                  updateLink,
+                  deleteLink,
+                  restoreLink,
+                  reorderLinks,
+                }
           }
           initialState={{
             profile: {
