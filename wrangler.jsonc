@@ -19,8 +19,8 @@
 	// ISR cache for public pages (see open-next.config.ts). scripts/deploy.mjs creates the namespaces and
 	// writes their real ids here; the placeholders work for local previews.
 	"kv_namespaces": [
-		{ "binding": "NEXT_INC_CACHE_KV", "id": "local-next-inc-cache" },
-		{ "binding": "NEXT_TAG_CACHE_KV", "id": "local-next-tag-cache" }
+		{ "binding": "NEXT_INC_CACHE_KV", "id": "a873006b97054807b27f0727d1111c98" },
+		{ "binding": "NEXT_TAG_CACHE_KV", "id": "f98e02102be34c62ba9c6d734f541672" }
 	],
 	"durable_objects": {
 		"bindings": [{ "name": "NEXT_CACHE_DO_QUEUE", "class_name": "DOQueueHandler" }]

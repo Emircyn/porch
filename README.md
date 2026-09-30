@@ -1,9 +1,11 @@
 # Porch
 
+[![CI](https://github.com/Emircyn/porch/actions/workflows/ci.yml/badge.svg)](https://github.com/Emircyn/porch/actions/workflows/ci.yml)
+
 A link-in-bio page builder: sign up, add your photo, links and a theme, and share one short address.
 Built from idea to working MVP with Next.js, Supabase and Stripe, deployed on Cloudflare Workers.
 
-**Live demo:** _coming soon_ · **One-click demo account:** `/demo` (no sign-up)
+**Live:** [porch.emircan-erdemci.workers.dev](https://porch.emircan-erdemci.workers.dev) · **One-click demo account:** [/demo](https://porch.emircan-erdemci.workers.dev/demo) (no sign-up) · Test card: `4242 4242 4242 4242`
 
 ![Porch landing page](docs/cover.webp)
 
