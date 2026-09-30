@@ -5,6 +5,7 @@ import { DemoLink } from "@/components/demo-link"
 import { Logo } from "@/components/logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
+import { BrandIcon } from "@/lib/platforms"
 import {
   Sheet,
   SheetContent,
@@ -12,6 +13,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+
+export const repoUrl = "https://github.com/Emircyn/porch"
 
 const nav = [
   { href: "/#editor", label: "Try it" },
@@ -42,6 +45,11 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1.5">
+          <Button variant="ghost" size="icon" asChild>
+            <a href={repoUrl} target="_blank" rel="noopener" aria-label="Source code on GitHub (opens in a new tab)">
+              <BrandIcon platform="github" className="size-4" />
+            </a>
+          </Button>
           <ModeToggle />
           <Button variant="outline" asChild className="hidden md:inline-flex">
             <DemoLink>Live demo</DemoLink>

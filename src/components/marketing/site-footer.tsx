@@ -2,6 +2,8 @@ import Link from "next/link"
 
 import { DemoLink } from "@/components/demo-link"
 import { Logo } from "@/components/logo"
+import { repoUrl } from "@/components/marketing/site-header"
+import { BrandIcon } from "@/lib/platforms"
 
 export function SiteFooter() {
   return (
@@ -10,7 +12,16 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2">
           <Logo />
           <p className="text-sm text-muted-foreground">
-            A portfolio project by Emircan Erdemci. Payments use Stripe test mode.
+            Powered by{" "}
+            <a
+              href="https://github.com/Emircyn"
+              target="_blank"
+              rel="noopener"
+              className="font-medium text-foreground underline-offset-2 hover:underline"
+            >
+              Emircan Erdemci
+            </a>
+            . Payments use Stripe test mode.
           </p>
           <p className="max-w-xl text-xs text-muted-foreground">
             Demo avatars by{" "}
@@ -22,7 +33,7 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Footer">
-          <ul className="flex gap-4 text-sm">
+          <ul className="flex flex-wrap gap-4 text-sm">
             <li>
               <DemoLink className="inline-block py-1.5 hover:underline">
                 Demo
@@ -37,6 +48,17 @@ export function SiteFooter() {
               <Link href="/signup" className="inline-block py-1.5 hover:underline">
                 Sign up
               </Link>
+            </li>
+            <li>
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-1.5 py-1.5 hover:underline"
+              >
+                <BrandIcon platform="github" className="size-4" />
+                GitHub
+              </a>
             </li>
           </ul>
         </nav>
