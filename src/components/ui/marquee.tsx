@@ -1,4 +1,8 @@
-import { type ComponentPropsWithoutRef } from "react"
+"use client"
+
+import { useSyncExternalStore, type ComponentPropsWithoutRef } from "react"
+
+const noSubscribe = () => () => {}
 
 import { cn } from "@/lib/utils"
 
@@ -42,6 +46,11 @@ export function Marquee({
   repeat = 4,
   ...props
 }: MarqueeProps) {
+  // The server sends one copy; the loop copies are added in the browser, which keeps the HTML (and the work a
+  // free Worker does to serve it) small. The strip sits below the fold, so the copies are there before it shows.
+  const inBrowser = useSyncExternalStore(noSubscribe, () => true, () => false)
+  const copies = inBrowser ? repeat : 1
+
   return (
     <div
       {...props}
@@ -54,7 +63,7 @@ export function Marquee({
         className
       )}
     >
-      {Array(repeat)
+      {Array(copies)
         .fill(0)
         .map((_, i) => (
           <div

@@ -5,8 +5,9 @@ import { ProfileView } from "@/components/profile/profile-view"
 import { getPublicPage } from "@/lib/public-page"
 import { getTheme } from "@/lib/themes"
 
-// Cached and refreshed at most once a minute; edits in the dashboard refresh it straight away.
-export const revalidate = 60
+// Cached for a day: a page only changes when its owner edits it or their plan changes, and both refresh it
+// straight away (revalidatePath). Rare background re-renders keep the Worker inside the free plan's CPU limit.
+export const revalidate = 86400
 
 // No pages are built ahead of time; each one is rendered on its first visit and then cached (ISR).
 export function generateStaticParams() {

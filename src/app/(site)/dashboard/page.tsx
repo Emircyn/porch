@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { ExternalLinkIcon, SparklesIcon } from "lucide-react"
 import Link from "next/link"
 
-import { Editor } from "@/components/editor/editor"
+import { LazyEditor as Editor } from "@/components/editor/editor-lazy"
 import { Button } from "@/components/ui/button"
 import type { EditorLink, SocialLink } from "@/lib/demo-profile"
 import { getCurrentProfile } from "@/lib/profile"
