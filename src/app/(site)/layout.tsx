@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   },
   description:
     "Build a beautiful link-in-bio page in minutes. Your photo, your links, your theme — shared at one short URL.",
+  twitter: { card: "summary_large_image" },
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

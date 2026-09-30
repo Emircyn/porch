@@ -22,10 +22,16 @@ export async function generateMetadata({ params }: PageProps<"/[username]">): Pr
   const page = await getPublicPage(username)
   if (!page) return { title: "Page not found" }
   const name = page.profile.displayName || page.profile.username
+  const description = page.profile.bio || `${name}'s links on Porch`
+  // A card in the page's own theme; the name and bio come through as the preview's title and text.
+  const images = [
+    { url: `/og/pages/${page.profile.themeId}.jpg`, width: 1200, height: 630, alt: `${name} on Porch` },
+  ]
   return {
     title: `${name} (@${page.profile.username})`,
-    description: page.profile.bio || `${name}'s links on Porch`,
-    openGraph: { title: name, description: page.profile.bio, type: "profile" },
+    description,
+    openGraph: { title: name, description, images, type: "profile", url: `/${page.profile.username}` },
+    twitter: { card: "summary_large_image", title: name, description, images },
   }
 }
 

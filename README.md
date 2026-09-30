@@ -82,6 +82,9 @@ Stripe · Cloudflare Workers via OpenNext · Vitest · dnd-kit · Recharts · Ma
 - **Phone previews use real iPhone 16 geometry.** The page is laid out at 393 px (the real viewport) and
   scaled into a frame built from Apple's measurements, so the preview matches the phone
   (`src/components/phone-frame.tsx`).
+- **Link previews cost the Worker nothing.** Every theme page and every user page has an Open Graph card in
+  its own theme (`public/og`), drawn with the real components and screenshotted ahead of time by
+  `npm run og:build`, instead of rendering images on each request with `ImageResponse`.
 - **The Worker went from 2.65 MiB to 1.64 MiB** (gzip) to fit the free plan's 3 MiB: `zod/mini`, no Supabase
   client in the browser, and a webpack build so shared modules aren't duplicated per route.
 - **The demo can't be vandalised.** Its editor runs locally, and database triggers refuse writes to the demo

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 
 import { pageFontVariables } from "@/lib/page-fonts"
@@ -5,6 +6,11 @@ import "../globals.css"
 import "../page-themes.css"
 
 const geist = Geist({ variable: "--font-sans", subsets: ["latin", "latin-ext"] })
+
+// Link previews need absolute image URLs.
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+}
 
 // Public pages get their own root layout: no theme switcher, toasts or animation libraries. What a visitor
 // downloads is the page itself and Next's runtime, which matters in Instagram's and TikTok's in-app browsers.
