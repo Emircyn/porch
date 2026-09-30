@@ -98,7 +98,7 @@ const persona = (
 
 /**
  * Creators for the landing page: one per theme, each drawn in a different DiceBear style (credited in the
- * footer). Five are real people added at the site owner's request; the rest are made up.
+ * footer). Six are real people added at the site owner's request; the rest are made up.
  */
 export const showcasePersonas: Persona[] = [
   persona(
@@ -192,6 +192,25 @@ export const showcasePersonas: Persona[] = [
       ["Open source on GitHub", "https://github.com/ridvanmalikokur"],
       ["Talks and slides", "https://ridvanmalikokur.dev/talks"],
       ["Get in touch", "mailto:hello@ridvanmalikokur.dev"],
+    ]
+  ),
+  persona(
+    {
+      username: "onurkucuk",
+      displayName: "Onur Küçük",
+      bio: "Full-stack developer. Web apps, side projects and a lot of coffee.",
+      avatar: "onur",
+      themeId: "ocean-breeze",
+      socials: [
+        { platform: "github", url: "https://github.com/onurkucuk" },
+        { platform: "x", url: "https://x.com/onurkucuk" },
+      ],
+    },
+    [
+      ["See what I'm building", "https://onurkucuk.dev"],
+      ["Open source on GitHub", "https://github.com/onurkucuk"],
+      ["Notes from the terminal", "https://onurkucuk.substack.com"],
+      ["Say hello", "mailto:hello@onurkucuk.dev"],
     ]
   ),
   persona(

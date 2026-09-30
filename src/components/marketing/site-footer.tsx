@@ -16,8 +16,8 @@ export function SiteFooter() {
             <a href="https://www.dicebear.com/licenses/" className="underline underline-offset-2 hover:text-foreground">
               DiceBear
             </a>
-            : Micah by Micah Lanier, Big Smile by Ashley Seo, Adventurer by Lisa Wischofsky and Personas by Draftbit and
-            Croodles by vijay verma (CC BY 4.0); Avataaars and Open Peeps by Pablo Stanley; Notionists, Lorelei, Pixel Art and Thumbs (CC0).
+            : Micah by Micah Lanier, Big Smile by Ashley Seo, Adventurer by Lisa Wischofsky and Personas by Draftbit,
+            Croodles by vijay verma and ToonHead by Johan Melin (CC BY 4.0); Avataaars and Open Peeps by Pablo Stanley; Notionists, Lorelei, Pixel Art and Thumbs (CC0).
           </p>
         </div>
         <nav aria-label="Footer">

@@ -23,6 +23,7 @@ const picks = [
   { id: "vintage-paper", name: "Vintage Paper", pro: true, font: "var(--font-page-libre-baskerville), ui-serif, Georgia, serif" },
   { id: "claymorphism", name: "Claymorphism", pro: true, font: "var(--font-page-plus-jakarta), ui-sans-serif, system-ui, sans-serif" },
   { id: "starry-night", name: "Starry Night", pro: true, font: "var(--font-page-libre-baskerville), ui-serif, Georgia, serif" },
+  { id: "ocean-breeze", name: "Ocean Breeze", pro: true, font: "var(--font-page-dm-sans), ui-sans-serif, system-ui, sans-serif" },
 ]
 
 const colorVars = [

@@ -62,6 +62,11 @@ export const themes = [
     id: "starry-night",
     name: "Starry Night",
     pro: true
+  },
+  {
+    id: "ocean-breeze",
+    name: "Ocean Breeze",
+    pro: true
   }
 ] as const
 

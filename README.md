@@ -17,7 +17,7 @@ Built from idea to working MVP with Next.js, Supabase and Stripe, deployed on Cl
 - **Editor with a live phone preview.** Drag links into order (mouse, touch or keyboard), feature one as a big
   card (YouTube links get their thumbnail), hide links without deleting them, undo a delete. Titles are
   suggested from the address. Every change saves as you type and shows on the phone straight away.
-- **11 themes, each with a dark mode.** Real shadcn/ui themes imported from [tweakcn](https://tweakcn.com);
+- **12 themes, each with a dark mode.** Real shadcn/ui themes imported from [tweakcn](https://tweakcn.com);
   the page follows the visitor's own light or dark setting.
 - **Free and Pro plans (Stripe, test mode).** Free: 5 links and 3 themes. Pro ($5/month): unlimited links,
   every theme and click analytics. Checkout, the Customer Portal and signed webhooks.
@@ -51,7 +51,7 @@ a Preview button), analytics and the public page.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/themes-dark.webp">
-  <img src="docs/themes-light.webp" alt="Eleven themes, each shown on a different creator's page">
+  <img src="docs/themes-light.webp" alt="Twelve themes, each shown on a different creator's page">
 </picture>
 
 The public page follows the visitor's own light or dark setting:
@@ -77,7 +77,7 @@ Stripe · Cloudflare Workers via OpenNext · Vitest · dnd-kit · Recharts · Ma
 - **Public pages ship almost no JavaScript.** They have their own root layout (no theme switcher, toasts or
   animation libraries), dark mode comes from CSS alone, and clicks are counted with `navigator.sendBeacon`
   instead of a redirect, so links go straight to where they point. Lighthouse (mobile): 98 / 100 / 100 / 100.
-- **Themes are fixed to WCAG AA on import.** Eight of the eleven tweakcn themes failed contrast somewhere;
+- **Themes are fixed to WCAG AA on import.** Ten of the twelve tweakcn themes failed contrast somewhere;
   `scripts/import-page-themes.mjs` measures every pair and adjusts OKLCH lightness until it passes.
 - **Phone previews use real iPhone 16 geometry.** The page is laid out at 393 px (the real viewport) and
   scaled into a frame built from Apple's measurements, so the preview matches the phone
@@ -119,7 +119,7 @@ live site, builds and deploys to Cloudflare Workers. It needs `wrangler login` a
 
 Themes from [tweakcn](https://tweakcn.com) · brand icons from [Simple Icons](https://simpleicons.org) (CC0) ·
 demo avatars from [DiceBear](https://www.dicebear.com/licenses/) (styles by Micah Lanier, Ashley Seo,
-Lisa Wischofsky, Draftbit and vijay verma under CC BY 4.0; Pablo Stanley; Zoish and others under CC0).
+Lisa Wischofsky, Draftbit, vijay verma and Johan Melin under CC BY 4.0; Pablo Stanley; Zoish and others under CC0).
 
 ## Licence
 
