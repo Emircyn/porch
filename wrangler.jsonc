@@ -3,25 +3,30 @@
 	"main": ".open-next/worker.js",
 	"name": "porch",
 	"compatibility_date": "2026-09-29",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
+	"observability": { "enabled": true },
 	"services": [
 		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
+			// Self-reference used by OpenNext for cache revalidation; the name must match the Worker's.
 			"binding": "WORKER_SELF_REFERENCE",
 			"service": "porch"
 		}
 	],
+	// ISR cache for public pages (see open-next.config.ts). scripts/deploy.mjs creates the namespaces and
+	// writes their real ids here; the placeholders work for local previews.
+	"kv_namespaces": [
+		{ "binding": "NEXT_INC_CACHE_KV", "id": "local-next-inc-cache" },
+		{ "binding": "NEXT_TAG_CACHE_KV", "id": "local-next-tag-cache" }
+	],
+	"durable_objects": {
+		"bindings": [{ "name": "NEXT_CACHE_DO_QUEUE", "class_name": "DOQueueHandler" }]
+	},
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] }],
 	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
 	}
 }

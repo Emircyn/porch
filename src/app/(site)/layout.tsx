@@ -21,6 +21,8 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
+  // Absolute URLs for the Open Graph image and canonical links.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
     default: "Porch — your link-in-bio page",
     template: "%s · Porch",
